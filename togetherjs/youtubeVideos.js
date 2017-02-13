@@ -101,6 +101,11 @@ function ($, util, session, elementFinder) {
             src += (/[?]/.test(src)) ? '&' : '?';
             src += 'enablejsapi=1';
           }
+          // we also need to add ?origin to the iframe src.
+          if (!/[?&]origin(&|$)/.test(src)) {
+            src += (/[?]/.test(src)) ? '&' : '?';
+            src += 'origin='+window.location.origin;
+          }
           // the youtube API seems to be unhappy unless the URL starts
           // with https
           if (!/^https[:]\/\//.test(src)) {
